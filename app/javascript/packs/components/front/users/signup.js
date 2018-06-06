@@ -43,12 +43,6 @@ class UserSignup extends Component {
       errors['name'] = 'Cannot be empty';
     }
 
-    if(typeof fields['name'] !== 'undefined'){
-      if(!fields['name'].match(/^[a-zA-Z]+$/)){
-        errors['name'] = 'Only letters';
-      }          
-    }
-
     //Email
     if(!fields['email']){
       errors['email'] = 'Email cannot be empty';
@@ -90,13 +84,11 @@ class UserSignup extends Component {
       if(typeof fields['user_consents_attributes'] == 'undefined'){
         fields['user_consents_attributes'] = [];
       }
+      let index = fields['user_consents_attributes'].findIndex(o => o.consent_id === parseInt(event.target.value));
       if(event.target.checked){
         fields['user_consents_attributes'].push({consent_id: parseInt(event.target.value)});
-      }else{
-        let index = fields['consents'].indexOf(event.target.value);
-        if(index > -1){
-          fields['user_consents_attributes'].splice(index,1);
-        }
+      }else if(index > -1){
+          fields['user_consents_attributes'] = fields['user_consents_attributes'].splice((index +1),1);
       }
     }else{
       fields[event.target.id] = event.target.value;
@@ -106,7 +98,7 @@ class UserSignup extends Component {
   handleSubmit(event) {
 
     if(this.validateForm()){
-      this.props.sign_up({sign_up: this.state.fields})
+      this.props.update({sign_up: this.state.fields})
         .then(response => {
           this.setState({success: true});
         })
