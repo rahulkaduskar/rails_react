@@ -1,4 +1,4 @@
-[https://vast-beach-70727.herokuapp.com/](https://vast-beach-70727.herokuapp.com/)
+
 ## Installation
 `yarn`
 
