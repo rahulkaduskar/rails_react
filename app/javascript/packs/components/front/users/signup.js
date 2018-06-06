@@ -98,7 +98,7 @@ class UserSignup extends Component {
   handleSubmit(event) {
 
     if(this.validateForm()){
-      this.props.update({sign_up: this.state.fields})
+      this.props.sign_up({sign_up: this.state.fields})
         .then(response => {
           this.setState({success: true});
         })
