@@ -1,0 +1,15 @@
+# Add new Consent in following format
+# title: 'I agree to Terms & Condition'
+# slug: 'Brand'
+# Never change slug of permission
+consents:
+  -
+    name: 'Terms & Condition'
+    description: 'I have read and agree to My Company Terms & Condition'
+    page_url: '/terms-and-condition'
+    mandatory: true
+  -
+    name: 'Privacy Policy'
+    description: 'I have read and agree to My Company Privacy Policy'
+    page_url: '/privacy-policy'
+    mandatory: true

@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<h1>User Consents</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @user_consents.each do |user_consent| %>
+      <tr>
+        <td><%= link_to 'Show', user_consent %></td>
+        <td><%= link_to 'Edit', edit_user_consent_path(user_consent) %></td>
+        <td><%= link_to 'Destroy', user_consent, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New User Consent', new_user_consent_path %>
