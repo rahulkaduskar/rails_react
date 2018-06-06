@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "blog app",
   "scripts": {
-    "start": "node index.js"
+    "start": "node app/javascripts/index.js"
   },
   "dependencies": {
     "axios": "^0.18.0",
