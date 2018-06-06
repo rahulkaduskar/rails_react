@@ -28,13 +28,9 @@
 
 
 # Ignore application configuration
-/config/application.yml
 /myapp_development
 
 
-
-/coverage
-/config/database.yml
 public/assets/
 public/uploads/
 #bin/delayed_job
