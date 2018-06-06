@@ -1,17 +1,25 @@
+
 default: &default
-  adapter: sqlite3
-  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  timeout: 5000
+  adapter: postgresql
+  encoding: unicode
+  # For details on connection pooling, see rails configuration guide
+  # http://guides.rubyonrails.org/configuring.html#database-pooling
+  pool: 5 #<%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
 
 development:
   <<: *default
-  database: myapp_development
+  database: rails_react_dev
+  username: rahulk
+  password: rahul1234
 
-test: &test
+test:
   <<: *default
-  database: myapp_test
-
+  database: rails_react_test
+  username: rahulk
+  password: rahul1234
+#
 production:
-  adapter: sqlite3
-  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  timeout: 5000
+  <<: *default
+  database: rails_react_production
+  username: rahulk
+  password: rahul1234
