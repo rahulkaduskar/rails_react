@@ -4,7 +4,7 @@ import { Link, Redirect } from 'react-router-dom';
 import { Button, Form, FormGroup, Label, Input, FormText, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import SweetAlert from 'react-bootstrap-sweetalert';
 import { loadConsents } from '../../../actions/consents.js';
-import { sign_up} from '../../../actions/users.js';
+import { update} from '../../../actions/users.js';
 
 
 class UserSignup extends Component {
@@ -98,7 +98,7 @@ class UserSignup extends Component {
   handleSubmit(event) {
 
     if(this.validateForm()){
-      this.props.update({sign_up: this.state.fields})
+      this.props.sign_up({sign_up: this.state.fields})
         .then(response => {
           this.setState({success: true});
         })
