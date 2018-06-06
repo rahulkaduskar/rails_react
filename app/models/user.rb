@@ -8,7 +8,7 @@ class User < ApplicationRecord
   validates :name, presence: true
   validate  :validate_consents_completeness
 
-  has_many :user_consents
+  has_many :user_consents, dependent: :destroy
   has_many :consents, through: :user_consents
 
   accepts_nested_attributes_for :user_consents

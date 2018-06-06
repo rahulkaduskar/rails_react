@@ -18,17 +18,6 @@ class UsersController < BaseController
     end
   end
 
-  # DELETE /users
-  # DELETE /users.json
-  def destroy
-    @user.invalidateTokens();
-    if @user.destroy
-      head :no_content
-    else
-      render json: @user.errors, status: :unprocessable_entity
-    end
-  end
-
   private
 
   # Use callbacks to share common setup or constraints between actions.

@@ -4,12 +4,7 @@ import promise from 'promise';
 let csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
 var instance = axios.create({
-  baseURL: '/',
-  headers: {
-    'X-Requested-With': 'XMLHttpRequest',
-    'X-CSRF-Token': csrfToken,
-    'Content-Type': 'application/json'
-  }
+  baseURL: '/'
 });
 
 instance.interceptors.request.use(function (config) {
@@ -17,6 +12,9 @@ instance.interceptors.request.use(function (config) {
   config.headers['client'] = auth.client;
   config.headers['access-token'] = auth.accessToken;
   config.headers['uid'] = auth.uid;
+  config.headers['X-Requested-With'] = 'XMLHttpRequest';
+  config.headers['X-CSRF-Token'] = csrfToken;
+  config.headers['Content-Type'] = 'application/json';
   return config;
 });
 
@@ -26,7 +24,7 @@ instance.interceptors.response.use(function (response) {
     if (401 === error.response.status) {
         localStorage.clear();
     }
-    return error;
+    return Promise.reject(error);
 });
 
 export default instance;

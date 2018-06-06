@@ -76,12 +76,12 @@ class UserProfileEdit extends Component {
 
   updatePage(event){
     this.setState({success: false});
-    this.props.history.go('/user/profile');
+    this.setState({isEdit: false});
+    this.props.cancelEdit(event);
   }
 
   movePage(event){
-    this.props.history.go('/user/profile');
-    event.preventDefault();
+    this.props.cancelEdit(event);
   }
 
   render() {

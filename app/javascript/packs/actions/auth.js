@@ -21,8 +21,6 @@ export function login(email, password) {
           const accessToken = response.headers['access-token'];
           const expiry = response.headers['expiry'];
           dispatch(successAuthentication(uid, client, accessToken, expiry));
-      }).catch(error => {
-        dispatch(failAuthentication());
       });
   };
 }
@@ -39,10 +37,8 @@ export function signout() {
         'uid': auth.uid
       }
     }).then(response => {
-      dispatch(doSignout());
-    }).catch(error => {
-      dispatch(doSignout());
-      console.log(error);
+      localStorage.clear();
+      window.location.href = '/';
     });
   };
 }
@@ -55,12 +51,19 @@ export function sign_up() {
       method: 'post'
     }).then(response => {
       dispatch(doRegistration());
-    }).catch(error => {
-      console.log(error);
     });
   };
 }
 
+export function deleteAccount() {
+  return (dispatch, getState) => {
+    const { auth } = getState();
+    return axios({
+      url: '/auth',
+      method: 'delete'
+    });
+  };
+}
 
 export function expireAuthentication() {
   return doSignout();

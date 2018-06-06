@@ -72,14 +72,11 @@ class UserSignup extends Component {
 
     if(this.state.consents.length){
       this.state.consents.map(function(consent, index){
-        if(typeof fields['consents'] == 'undefined'){
-          fields['consents'] = [];
+        if(typeof fields['user_consents_attributes'] == 'undefined'){
+          fields['user_consents_attributes'] = [];
         }
-        if(typeof fields['consents'].find(o => o.consent_id == consent.id) == "undefined") {
-          if(typeof errors['consents'] == 'undefined'){
-            errors['consents'] = [];
-          }
-          errors['consents'].push(`Please except the ${consent.name}`);
+        if(typeof fields['user_consents_attributes'].find(o => o.consent_id == consent.id) == "undefined") {
+          errors[`consent${consent.id}`] = `Please except the ${consent.name}`;
         }
       });
     }
@@ -90,15 +87,15 @@ class UserSignup extends Component {
   handleChange(event) {
     let fields = this.state.fields;
     if(event.target.name == 'consents'){
-      if(typeof fields['consents'] == 'undefined'){
-        fields['consents'] = [];
+      if(typeof fields['user_consents_attributes'] == 'undefined'){
+        fields['user_consents_attributes'] = [];
       }
       if(event.target.checked){
-        fields['consents'].push({consent_id: parseInt(event.target.value)});
+        fields['user_consents_attributes'].push({consent_id: parseInt(event.target.value)});
       }else{
         let index = fields['consents'].indexOf(event.target.value);
         if(index > -1){
-          fields['consents'].splice(index,1);
+          fields['user_consents_attributes'].splice(index,1);
         }
       }
     }else{
@@ -122,6 +119,11 @@ class UserSignup extends Component {
         });
     }
     event.preventDefault();
+  }
+
+  showLoginPage(){
+    this.setState({success: false});
+    this.props.history.push('/user/login');
   }
 
 
@@ -191,10 +193,9 @@ class UserSignup extends Component {
                                 </span>
                             </span>
                           </span>
-
+                          <span style={{color: 'red'}}>{errors[`consent${consent.id}`]}</span>
                         </FormGroup>)
                     ) }
-                    <span style={{color: 'red'}}>{errors['consents']}</span>
 
                 <Button block className='mt-3' type='submit'>
                   Sign up
@@ -204,7 +205,7 @@ class UserSignup extends Component {
                     show={this.state.success}
                     title="Success"
                     confirmBtnBsStyle="success"
-                    onConfirm={() => this.props.history.go('/user/login')}
+                    onConfirm={() => this.showLoginPage()}
                 >
                     Welcome! You have signed up successfully
                 </SweetAlert>

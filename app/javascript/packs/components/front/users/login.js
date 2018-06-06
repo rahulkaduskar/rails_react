@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link, Redirect } from 'react-router-dom';
 import { Button, FormGroup, FormControl, Input, FormText, Label } from "reactstrap";
+import SweetAlert from 'react-bootstrap-sweetalert';
 import { login } from '../../../actions/auth.js'
 
 class UserLogin extends Component {
@@ -10,7 +11,8 @@ class UserLogin extends Component {
 
     this.state = {
       email: "",
-      password: ""
+      password: "",
+      error: false
     };
   }
 
@@ -26,7 +28,14 @@ class UserLogin extends Component {
 
   handleSubmit() {
     const { email, password } = this.state;
-    this.props.login(email, password);
+    this.props.login(email, password)
+        .catch(error => {
+          var error_message =  "Something went wrong. Please try again later";
+          if(error.response.data != null && error.response.data.errors != null){
+            error_message = error.response.data.errors.join(', ');
+          }
+          this.setState({error: true, error_message: error_message});
+        });
     return false;
   }
 
@@ -65,6 +74,15 @@ class UserLogin extends Component {
             >
               Login
             </Button>
+            <SweetAlert
+                    danger
+                    show={this.state.error}
+                    confirmBtnBsStyle="danger"
+                    title="Error"
+                    onConfirm={() => this.setState({error: false})}
+                >
+                  {this.state.error_message}
+                </SweetAlert>
           </form>
         </div>
       );

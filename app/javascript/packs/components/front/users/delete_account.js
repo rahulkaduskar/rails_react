@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link, Redirect } from 'react-router-dom';
 import { Button, Label } from "reactstrap";
-import { deleteAccount } from '../../../actions/users.js';  
+import { deleteAccount } from '../../../actions/auth.js';  
 import SweetAlert from 'react-bootstrap-sweetalert';
 
 class UserDelete extends Component {
@@ -21,11 +21,12 @@ class UserDelete extends Component {
     this.props.deleteAccount()
         .then(response => {
           this.setState({showDeleteWarning: false});
-          this.props.history("/");
+          localStorage.clear();
+          window.location.href="/";
         })
         .catch(error => {
-            var error_message = error.response.data.errors.full_messages;
-             this.setState({error: true, error_message: error_message});
+          let error_message = error.response.data.errors.join(', ');
+          this.setState({error: true, error_message: error_message});
         });
   }
 

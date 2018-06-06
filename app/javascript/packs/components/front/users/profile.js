@@ -13,6 +13,7 @@ class UserProfile extends Component {
     super(props);
     this.getInitialState = this.getInitialState.bind(this);
     this.state = this.getInitialState();
+    this.cancelEdit = this.cancelEdit.bind(this);
   }
 
   getInitialState() {
@@ -43,6 +44,10 @@ class UserProfile extends Component {
     fields[event.target.id] = event.target.value;
   }
 
+  cancelEdit(){
+    this.setState({isEdit: false});
+  }
+
 
   render() {
     const { isAuthenticated } = this.props;
@@ -56,7 +61,7 @@ class UserProfile extends Component {
         );
     }else if(this.state.isEdit){
       return (
-          <UserProfileEdit history={ this.props.history} user={this.state.user}></UserProfileEdit>
+          <UserProfileEdit history={ this.props.history} cancelEdit = {this.cancelEdit} user={this.state.user}></UserProfileEdit>
       );
     }else{
       return (

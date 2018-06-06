@@ -6,7 +6,7 @@ git_source(:github) do |repo_name|
 end
 
 gem 'sqlite3'
-gem 'rails', '~> 5.1.0'
+gem 'rails', '~> 5.1.1'
 gem 'puma', '~> 3.7'
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
@@ -35,6 +35,7 @@ group :development do
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'better_errors'
   gem 'binding_of_caller'
+  gem 'brakeman'
 end
 
 gem 'faker'

@@ -19,7 +19,7 @@ export function profile() {
 
 export function sign_up(params) {
   return (dispatch, getState) => {
-    dispatch({ type: SIGNUP });
+    dispatch({ type: REQUEST });
     return axios({
       url: '/auth',
       method: 'post',
