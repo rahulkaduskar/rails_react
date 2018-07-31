@@ -1,49 +1,49 @@
 class PostsController < BaseController
 
+  before_action :set_post, only: [:show, :update, :destroy]
+
   def index
-    @posts = Post.all.limit(20)
+    @posts = current_user.posts
+                         .page(params[:page])
+                         .per(params[:per_page] || 20)
     render json: @posts
   end
 
   def show
-    @post = Post.find(params[:id])
     render json: @post
   end
 
-  def new
-    @post = Post.new
-  end
-
-  def edit
-  end
-
   def create
-    @post = Post.new(post_params)
-    @post.save
-    render json: "ok"
+    @post = current_user.posts.new(post_params)
+    if @post.save
+      head :ok
+    else
+      head :unprocessable_entity
+    end
   end
 
   def update
-    respond_to do |format|
-      if @post.update(post_params)
-        format.html { redirect_to @post, notice: 'Post was successfully updated.' }
-        format.json { render :show, status: :ok, location: @post }
-      else
-        format.html { render :edit }
-        format.json { render json: @post.errors, status: :unprocessable_entity }
-      end
+    if @post.update(post_params)
+        head :ok
+    else
+      head :unprocessable_entity
     end
   end
 
   def destroy
-    @post = Post.find(params[:id])
+    @post = current_user.posts.find(params[:id])
     @post.destroy
-    render json: "ok"
+    render json: "ok" 
   end
 
 private
 
   def post_params
-    params.require(:post).permit(:title, :slug, :content, :thumb_url)
+    params.require(:post).permit(:title, :content)
   end
+
+  def set_post
+    @post = current_user.posts.find(params[:id])
+  end
+
 end

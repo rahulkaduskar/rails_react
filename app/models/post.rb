@@ -1,14 +1,6 @@
 class Post < ApplicationRecord
+    belongs_to :user
 
-  before_create :set_slug, :set_thumb
-
-private
-
-  def set_slug
-    self.slug = self.title.parameterize
-  end
-
-  def set_thumb
-    self.thumb_url = "https://unsplash.it/300/300"
-  end
+    validates :title, presence: true
+    validates_length_of :content, :maximum => 250, :allow_blank => true
 end

@@ -65,7 +65,7 @@ class UserProfile extends Component {
       );
     }else{
       return (
-        <div>
+        <div className='d-flex col-12'>
             <div className='Login'>
                 <h3> Profile </h3>
                 <Form onSubmit={(evt) => this.handleSubmit(evt)}>

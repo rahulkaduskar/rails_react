@@ -15,8 +15,10 @@ class Navbar extends Component {
     if(!this.props.isAuthenticated){
       return [ { key: 1, text: 'Login', url: '/user/login'}, 
                { key: 2, text: 'Register', url: '/user/signup'} ];
+               
     }else{
-      return [ { key: 1, text: 'profile setting', url: '/user/profile'}];
+      return [ { key: 1, text: 'profile setting', url: '/user/profile'},
+               { key: 2, text: 'Post', url: '/user/posts'} ];
     }
   }
 

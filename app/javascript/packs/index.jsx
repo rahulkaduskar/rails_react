@@ -6,8 +6,6 @@ import persistState from 'redux-localstorage';
 import thunkMiddleware from 'redux-thunk';
 import { createLogger } from 'redux-logger';
 import createHistory from 'history/createBrowserHistory';
-import promise from 'redux-promise';
-import axios from 'axios';
 import { reducer as formReducer } from 'redux-form';
 import auth from './reducers/reducer_auth';
 import UsersReducer from './reducers/reducer_users';

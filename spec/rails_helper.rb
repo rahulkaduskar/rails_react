@@ -5,6 +5,7 @@ require File.expand_path('../../config/environment', __FILE__)
 abort("The Rails environment is running in production mode!") if Rails.env.production?
 require 'spec_helper'
 require 'rspec/rails'
+require 'faker'
 require 'pry'
 
 # adding feature helpers
@@ -26,6 +27,9 @@ RSpec.configure do |config|
   config.before :suite do
     Warden.test_mode!
   end
+
+  config.include RequestSpecHelper, type: :request
+  config.include Devise::Test::ControllerHelpers, type: :controller
 
   config.before(:all) do
     Rails.application.load_seed

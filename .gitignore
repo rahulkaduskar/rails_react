@@ -46,3 +46,5 @@ vendor/bundle
 /public/packs
 /node_modules
 /vendor
+
+.history

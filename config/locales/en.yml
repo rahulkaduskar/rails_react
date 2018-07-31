@@ -29,4 +29,37 @@
 # To learn more, please read the Rails Internationalization guide
 # available at http://guides.rubyonrails.org/i18n.html.
 
+
 en:
+  errors:
+    messages:
+      not_email: "Email is invalid"
+  activerecord:
+    errors:
+      messages:
+        not_email: "Email is invalid"
+      models:
+        user:
+          attributes:
+            password:
+              invalid: "Password is invalid."
+            current_password:
+              invalid: Password "is invalid."
+            account:
+              confirmed: "Account is already confirmed"
+            name:
+              blank: "Name can't be blank"
+              taken: "Name is already taken"
+              too_long: "Name is too long"
+            email:
+              blank: "Email can't be blank"
+              taken: "Email is already taken"
+              invalid: "Email is invalid"
+            confirmation_token:
+              invalid: "Confirmation token is invalid"
+        post:
+          attributes:
+            title: 
+              blank: "Title can't be blank"
+            content:
+              too_long: "Post content is too long."

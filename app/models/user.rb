@@ -11,6 +11,8 @@ class User < ApplicationRecord
   has_many :user_consents, dependent: :destroy
   has_many :consents, through: :user_consents
 
+  has_many :posts
+
   accepts_nested_attributes_for :user_consents
 
   def validate_consents_completeness

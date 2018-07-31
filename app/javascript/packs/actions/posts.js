@@ -1,45 +1,61 @@
 import axios from '../config/http';
 
-export const FETCH_POSTS = 'fetch_posts';
-export const FETCH_POST = 'fetch_post';
-export const DELETE_POST = 'delete_post';
-export const CREATE_POST = 'create_post';
+export const RECEIVED = 'RECEIVED';
+export const REQUEST = 'REQUEST';
 
-const ROOT_URL = '/';
+const ROOT_URL = '';
 
 export function fetchPosts() {
-  const request = axios.get(`${ROOT_URL}/posts`);
-  
-  return {
-    type: FETCH_POSTS,
-    payload: request
+  return (dispatch, getState) => {
+    const { auth } = getState();
+    dispatch({ type: REQUEST });
+    return axios({
+      url: `${ROOT_URL}/posts.json`
+    });
   };
+
 }
 
 export function fetchPost(id) {
-  const request = axios.get(`${ROOT_URL}/posts/${id}`);
-
-  return {
-    type: FETCH_POST,
-    payload: request
+  return (dispatch, getState) => {
+    const { auth } = getState();
+    dispatch({ type: REQUEST });
+    return axios({
+      url: `${ROOT_URL}/posts/${id}`
+    });
   };
 }
 
-export function deletePost(id, callback) {
-  const request = axios.delete(`${ROOT_URL}/posts/${id}`).then(() => callback());
+// export function deletePost(id, callback) {
+//   const request = axios.delete(`${ROOT_URL}/posts/${id}`).then(() => callback());
 
-  return {
-    type: DELETE_POST,
-    payload: id
+//   return {
+//     type: DELETE_POST,
+//     payload: id
+//   }
+// }
+
+export function createPost(values) {
+  return (dispatch, getState) => {
+    const { auth } = getState();
+    dispatch({ type: REQUEST });
+    return axios({
+      url: `${ROOT_URL}/posts.json`,
+      method: 'POST',
+      data: values
+    });
   }
 }
 
-export function createPost(values, callback) {
-  const request = axios.post(`${ROOT_URL}/posts`, values).then(() => callback());
-
-  return {
-    type: CREATE_POST,
-    payload: request
-  };
+export function updatePost(id, values) {
+  return (dispatch, getState) => {
+    const { auth } = getState();
+    dispatch({ type: REQUEST });
+    return axios({
+      url: `${ROOT_URL}/posts/${id}.json`,
+      method: 'PUT',
+      data: values
+    });
+  }
 }
 

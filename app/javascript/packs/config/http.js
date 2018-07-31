@@ -22,7 +22,7 @@ instance.interceptors.response.use(function (response) {
     return response;
 }, function (error) {
     if (401 === error.response.status) {
-        localStorage.clear();
+        // localStorage.clear();
     }
     return Promise.reject(error);
 });

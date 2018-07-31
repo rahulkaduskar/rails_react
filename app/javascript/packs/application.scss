@@ -33,6 +33,33 @@ html, body {
 
   .a {
     white-space: pre-wrap;
-    stext-align: left;
+    text-align: left;
   }
+}
+.container{
+  display: flex;
+  align-center{
+    margin: 0px auto;
+  }
+}
+
+trix-toolbar .trix-button-group {
+  margin-bottom: 5px;
+}
+trix-editor{
+  min-height: 200px;
+}
+
+
+.clearfix {
+  &::after {
+    display: block;
+    content: "";
+    clear: both;
+  }
+}
+.loader{
+  position: fixed;
+  left: 50%;
+  top: 50%;
 }

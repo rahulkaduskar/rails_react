@@ -5,7 +5,8 @@ Rails.application.routes.draw do
 
   resource :user
   resources :consents
-
+  resources :posts
+  
   root 'home#index'
   get '*path', to: 'home#index'
 end
