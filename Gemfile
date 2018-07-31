@@ -6,7 +6,7 @@ git_source(:github) do |repo_name|
 end
 
 gem 'pg'
-gem 'rails', '~> 5.1.1'
+gem 'rails', '~> 5.1.5'
 gem 'puma', '~> 3.7'
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
@@ -26,6 +26,7 @@ group :development, :test do
   gem 'cucumber-rails', :require => false
   gem 'database_cleaner'
   gem 'autotest-rails'
+  gem 'faker', git: 'https://github.com/stympy/faker'
 end
 
 group :development do
@@ -38,11 +39,10 @@ group :development do
   gem 'brakeman'
 end
 
-gem 'faker'
 gem "figaro"
 gem 'oj'
 gem 'active_model_serializers', '0.9.3'
-
+gem 'kaminari'
 gem 'jquery-rails'
 
 gem 'devise_token_auth'
